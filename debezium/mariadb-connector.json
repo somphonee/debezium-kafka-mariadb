@@ -1,0 +1,31 @@
+{
+  "name": "mariadb-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+    "tasks.max": "1",
+    "database.hostname": "mariadb",
+    "database.port": "3306",
+    "database.user": "debezium",
+    "database.password": "debeziumpass123",
+    "topic.prefix": "mariadb01",
+    "database.server.id": "223344",
+    "database.include.list": "appdb",
+    "table.include.list": "appdb.customers,appdb.orders",
+    "include.schema.changes": "true",
+    "snapshot.mode": "initial",
+    "decimal.handling.mode": "precise",
+    "time.precision.mode": "connect",
+    "tombstones.on.delete": "false",
+    "schema.history.internal.kafka.bootstrap.servers": "kafka:29092",
+    "schema.history.internal.kafka.topic": "schema-changes.mariadb",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false",
+    "transforms": "unwrap",
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.drop.tombstones": "false",
+    "transforms.unwrap.delete.handling.mode": "rewrite",
+    "transforms.unwrap.add.fields": "op,ts_ms,source.db,source.table"
+  }
+}
