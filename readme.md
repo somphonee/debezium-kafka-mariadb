@@ -42,6 +42,21 @@ curl -X POST \
   -d @debezium/mariadb-connector.json \
   http://localhost:8083/connectors
 ```
+or
+```bash
+# Try registering the connector again
+$body = Get-Content "debezium/mariadb-connector.json" -Raw
+Invoke-RestMethod -Uri "http://localhost:8083/connectors" -Method Post -ContentType "application/json" -Body $body
+
+```
+
+```bash
+docker compose exec mariadb mysql -u root -prootpass123 -e "
+SHOW VARIABLES LIKE 'log_bin';
+SHOW VARIABLES LIKE 'binlog_format';
+SHOW BINARY LOGS;
+"
+```
 
 ### 3. Start the Spring Boot Consumer
 
